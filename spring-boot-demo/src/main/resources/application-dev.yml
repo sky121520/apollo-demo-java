@@ -14,6 +14,14 @@
 # limitations under the License.
 #
 
-spring:
-  profiles:
-    active: dev
+server:
+  port: 8881
+
+apollo:
+  meta: http://localhost:1002,http://localhost:1004
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    # will inject 'application' and 'TEST1.apollo' namespaces in bootstrap phase
+    namespaces: application,TEST1.apollo,application.yaml,TEST1.public_dev

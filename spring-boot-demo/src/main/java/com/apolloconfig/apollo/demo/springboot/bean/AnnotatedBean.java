@@ -32,12 +32,20 @@ public class AnnotatedBean {
   private int batch;
   private List<JsonBean> jsonBeans;
 
+  private String public_a;
+
   /**
    * ApolloJsonValue annotated on fields example, the default value is specified as empty list - []
    * <br /> jsonBeanProperty=[{"someString":"hello","someInt":100},{"someString":"world!","someInt":200}]
    */
   @ApolloJsonValue("${jsonBeanProperty:[]}")
   private List<JsonBean> anotherJsonBeans;
+
+  @Value("${public_a:100}")
+  public void setPublic_a(String public_a) {
+    logger.info("updating batch, old value: {}, new value: {}", this.public_a, public_a);
+    this.public_a = public_a;
+  }
 
   @Value("${batch:100}")
   public void setBatch(int batch) {
@@ -64,7 +72,7 @@ public class AnnotatedBean {
   @Override
   public String toString() {
     return String.format("[AnnotatedBean] timeout: %d, batch: %d, jsonBeans: %s", timeout, batch,
-        jsonBeans);
+        jsonBeans) + ", public_a" + ":" + public_a;
   }
 
   private static class JsonBean {
